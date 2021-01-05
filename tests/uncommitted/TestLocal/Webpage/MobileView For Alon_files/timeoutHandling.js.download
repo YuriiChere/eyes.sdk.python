@@ -1,0 +1,34 @@
+// To set when page starts
+var timeoutCounterEnabled = true;
+var timeoutAfterNumOfMinutes = 0;
+
+var timeoutTimerHandle = null;
+
+function disableTimeoutCounter() {
+    timeoutCounterEnabled = false;
+    resetTimeoutCounter();
+}
+
+function resetTimeoutCounter() {
+    if (timeoutTimerHandle!=null){
+        clearTimeout(timeoutTimerHandle);
+        timeoutTimerHandle = null;
+    }
+
+    if (timeoutCounterEnabled && timeoutAfterNumOfMinutes > 0){
+        timeoutTimerHandle = setTimeout("startTimeoutWarning()",timeoutAfterNumOfMinutes*60000);
+    }
+}
+
+function startTimeoutWarning() {
+    openModalWithRetFunc('/asset-manager-web/core/pages/global/beforeTimeoutPage.jsf', 'dialogHeight: 150px; dialogWidth: 400px;', 'sessionTimeoutResponse(retValue)');
+}
+
+function sessionTimeoutResponse(retValue) {
+    if (retValue){
+        resetTimeoutCounter();
+    } else {
+        handleSessionTimeout();
+    }
+}
+

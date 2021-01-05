@@ -1,0 +1,77 @@
+var menuOpenedListeners = [];
+var menuClosedListeners = [];
+
+function addMenuOpenedListener(listener) {
+    menuOpenedListeners.push(listener);
+}
+
+function addMenuClosedListener(listener) {
+    menuClosedListeners.push(listener);
+}
+
+function callMenuOpenedListeners() {
+    for (var i = 0; i < menuOpenedListeners.length; i++) {
+        var currentListener = menuOpenedListeners[i];
+        currentListener();
+    }
+}
+
+function callMenuClosedListeners() {
+    for (var i = 0; i < menuClosedListeners.length; i++) {
+        var currentListener = menuClosedListeners[i];
+        currentListener();
+    }
+}
+
+
+function closeHomeMenu() {
+    if (window.event.srcElement.id != 'mainForm:menuSubview:menuarrow' &&
+        window.event.srcElement.id != 'mainForm:menuSubview:appnamemenu') {
+        var homeMenu = document.getElementById('homeMenu');
+        homeMenu.style.display = 'none';
+        document.getElementById('appMenuDiv').className="appMenuDiv";
+        document.getElementById('appMenuDivLeft').className="";
+        document.getElementById('appMenuDivRight').className="";
+        callMenuClosedListeners();
+    }
+}
+
+function handleHomeMenuClick() {
+    var homeMenu = document.getElementById('homeMenu');
+    if (isMenuOpen()) {
+        homeMenu.style.display = 'none';
+        document.getElementById('appMenuDiv').className="appMenuDiv";
+        document.getElementById('appMenuDivLeft').className="";
+        document.getElementById('appMenuDivRight').className="";
+        document.body.detachEvent("onclick", closeHomeMenu);
+        callMenuClosedListeners();
+    } else {
+        homeMenu.style.display = 'inline';
+        document.getElementById('appMenuDiv').className="appMenuDivSelected";
+        document.getElementById('appMenuDivLeft').className="appMenuDivLeftSelected";
+        document.getElementById('appMenuDivRight').className="appMenuDivRightSelected";
+        document.body.attachEvent("onclick", closeHomeMenu);
+        callMenuOpenedListeners();
+    }
+}
+
+function handleMenuOpenerMouseOver() {
+    if (!isMenuOpen()) {
+        document.getElementById('appMenuDiv').className="appMenuDivOver";
+        document.getElementById('appMenuDivLeft').className="appMenuDivLeftOver";
+        document.getElementById('appMenuDivRight').className="appMenuDivRightOver";
+    }
+}
+
+function handleMenuOpenerMouseOut() {
+    if (!isMenuOpen()) {
+        document.getElementById('appMenuDiv').className="appMenuDiv";
+        document.getElementById('appMenuDivLeft').className="";
+        document.getElementById('appMenuDivRight').className="";
+    }
+}
+
+function isMenuOpen() {
+    var homeMenu = document.getElementById('homeMenu');
+    return homeMenu.style.display == 'inline';
+}

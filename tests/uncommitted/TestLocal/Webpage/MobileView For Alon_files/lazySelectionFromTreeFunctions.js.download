@@ -1,0 +1,187 @@
+
+function lazy_syncSelectionStateWithServer(){
+	window.document.getElementById("mainForm:syncButton").click();
+}
+
+
+// FUNCTIONS FOR RIGHT SIDE LIST (SELECTION)
+
+function lazy_setElementSelectionState(divElement, selected){
+	divElement.className = selected?'selectedTreeItem':'treeItem';
+	var inputs = divElement.getElementsByTagName('INPUT');
+	for (var i=0; i<inputs.length; i++){
+		var inputElm = inputs[i];
+		if (inputElm.type=="checkbox"){
+			inputElm.checked = selected;
+		}
+	}
+}
+
+function lazy_isElementSelected(divElement){
+	return (divElement.className == 'selectedTreeItem');
+}
+
+function lazy_getElementId(divElement){
+	var inputs = divElement.getElementsByTagName('INPUT');
+	for (var i=0; i<inputs.length; i++){
+		var inputElm = inputs[i];
+		if (inputElm.type="HIDDEN"){
+			return inputElm.value;
+		}
+	}
+
+	return null;
+}
+
+
+function lazy_subscribedTreeClicked(event,element){
+	var divElement = element.parentNode;
+
+	if(event.ctrlKey==1){
+		lazy_setElementSelectionState(divElement, !lazy_isElementSelected( divElement ));
+	}else{
+		lazy_clearSelection('subscribedSelectionDiv');
+		lazy_setElementSelectionState(divElement, true);
+	}
+}
+
+
+// catch the onclick event and decide if there was a SHIFT or a CTRL button pressed
+function lazy_subscribedTreeSingleClicked(event,element){
+	if (lazy_isSelectionFromTreeDisabled()){
+		return;
+	}
+
+	lazy_subscribedTreeClicked(event,element);
+	lazy_syncSelectionStateWithServer();
+}
+
+
+
+// FUNCTIONS FOR LEFT SIDE LIST (TREE)
+
+
+function lazy_avaliableTreeClicked(event,element){
+	var divElement = element.parentNode;
+
+	if(event.ctrlKey==1){
+		lazy_setElementSelectionState(divElement, !lazy_isElementSelected( divElement ));
+	}else{
+		lazy_clearSelection('avaliableSelectionDiv');
+		lazy_setElementSelectionState(divElement, true);
+	}
+}
+
+
+// catch the onclick event and decide if there was a SHIFT or a CTRL button pressed
+function lazy_avaliableTreeSingleClicked(event,element){
+	if (lazy_isSelectionFromTreeDisabled()){
+		return;
+	}
+
+	lazy_avaliableTreeClicked(event,element);
+	lazy_syncSelectionStateWithServer();
+}
+
+
+
+// COMMON FUNCTIONS
+
+// method to clear all elements of selection css
+function lazy_clearSelection(selectionElementName){
+	var selectionParent = window.document.getElementById(selectionElementName);
+	var divs = selectionParent.getElementsByTagName('DIV');
+	for(i=0; i<divs.length ;i++ ){
+		if(lazy_isElementSelected(divs[i])){
+			lazy_setElementSelectionState(divs[i],false);
+		}
+	}
+}
+
+
+// method to get all the ids of the selected elements from the left side
+function lazy_moveRight(){
+	if (lazy_isSelectionFromTreeDisabled()){
+		return false;
+	}
+
+	lazy_getSelectedNodesToMove('avaliableSelectionDiv');
+	lazy_clearAllSelection();
+	return true;
+}
+
+
+// method to get all the ids of the selected elements from the right side
+function lazy_moveLeft(){
+	if (lazy_isSelectionFromTreeDisabled()){
+		return false;
+	}
+
+	lazy_getSelectedNodesToMove('subscribedSelectionDiv');
+	lazy_clearAllSelection();
+	return true;
+}
+
+
+// method to set all the selected id's in one string
+function lazy_getSelectedNodesToMove(selectionElementName){
+	var selectionElement = window.document.getElementById(selectionElementName);
+	var nodesToMove = '';
+	var divs = selectionElement.getElementsByTagName('DIV');
+	for(i=0; i< divs.length ;i++ ){
+		if(lazy_isElementSelected(divs[i])){
+			var elementId = lazy_getElementId(divs[i]);
+			nodesToMove=nodesToMove+","+elementId;
+		}
+	}
+
+	document.getElementById('nodesToMove').value=nodesToMove;
+	return nodesToMove;
+}
+
+
+function lazy_isSelectionFromTreeDisabled(){
+	return window.document.getElementById("mainForm:selectionFromTreeDisabled").value=="true";
+}
+
+
+function lazy_avaliableTreeDblClicked(event,element){
+	if (lazy_isSelectionFromTreeDisabled()){
+		return;
+	}
+
+	if (event.ctrlKey==1){
+		return;
+	}
+
+	lazy_avaliableTreeClicked(event,element);
+	window.document.getElementById("mainForm:moveRightButt").click();
+}
+
+
+
+function lazy_subscribedTreeDblClicked(event,element){
+	if (lazy_isSelectionFromTreeDisabled()){
+		return;
+	}
+
+	if (event.ctrlKey==1){
+		return;
+	}
+
+	lazy_subscribedTreeClicked(event,element);
+	window.document.getElementById("mainForm:moveLeftButt").click();
+}
+
+
+function lazy_clearAllSelection(){
+ 	 lazy_clearSelection('subscribedSelectionDiv');
+ 	 lazy_clearSelection('avaliableSelectionDiv');
+}
+
+
+function lazy_setSelectionFromTreeDisabledState(state){
+	lazy_clearAllSelection()
+	window.document.getElementById("mainForm:selectionFromTreeDisabled").value = state?"true":"false";
+	setButtonEnabledStatus(window.document.getElementById("selctionFromTreeBodyDiv"),!state);
+}

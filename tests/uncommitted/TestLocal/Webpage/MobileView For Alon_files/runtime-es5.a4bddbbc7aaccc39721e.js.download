@@ -1,0 +1,84 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+		<title>MobileView</title>
+        <style type="text/css">
+                        .loginTextCss{
+                                 padding:0 0 0 22px;
+                        }
+						.remebereMeMargin{
+							margin-left:0;
+							_margin-left:-3px;  /* For compat mode */
+						}
+                
+
+            #javax_faces_developmentstage_messages{
+                display: none;
+            }
+
+			.login-spinner{
+				position: relative;
+				top:15px;
+			}
+        </style>
+		<script type="text/javascript">
+			function loginClick(){
+			    try {
+                    var loginButton = window.document.getElementById('login-button');
+                    var loginButtonWrapper = window.document.getElementById('login-button-wrapper');
+                    var loadingImg = window.document.getElementById('login-loading-img');
+
+                    loadingImg.style.display = '';
+                    loginButton.style.color = 'transparent';
+                    loginButtonWrapper.style.paddingTop = '0';
+                    loadingImg.style.left = (-1 * (loginButton.clientWidth / 2 + 20)) + 'px'; // 20 is half the width of the icon
+                } catch (ignore) {
+                }
+			}
+		</script></head><body onload="setTimeout(function(){document.getElementById('j_username').focus();},0);" style="margin:0px; overflow: hidden;">
+	<div style="display:none" id="notLogedInMarker"></div>
+	<form action="/asset-manager-web/j_spring_security_check" method="post">
+		<table border="0" align="center" height="100%" width="687" cellpadding="0" cellspacing="0" style="height: 100%;">
+			<tr valign="middle">
+				<td valign="middle">
+					<div class="directionCss" style="display: block; margin-bottom: 3px;"><span style="font-size:12px; font-weight: bold; color: #0000FF; font-family:arial">MobileView is not registered. There are 27 days left to the trial period.<BR />Please go to https://www.stanleyhealthcare.com/support to request a license key for MobileView</span>
+					</div>
+					<div style="color:#000000; font-family:arial, Helvetica, sans-serif; font-size:14px;height: 427px;background: url('/asset-manager-web/images/branding/healthcare/bg_login.jpg') no-repeat;">
+						<div style="width:200px;height:150px;float:right;">
+							<table border="0" width="100%" cellpadding="0" cellspacing="0">
+
+							<tr>
+								<td style="padding:3 6 0 22;" valign="bottom">
+									<br clear="all" />
+									<a href="https://www.stanleyhealthcare.com/" target="new"><img src="/asset-manager-web/images/branding/healthcare/logo_mobileview.gif" style="border:1; hspace:2;" />
+									</a>
+								</td>
+							</tr>
+							</table>
+						</div>
+						<br clear="all" />
+
+						<div style="height:50; padding:0 0 0 15;">
+							<div style="height:10;"></div>
+						</div>
+
+						<div class="loginTextCss"><label for="j_username">User Name:</label>
+							<br /><input id="j_username" name="j_username" type="text" value="" style="font-size:16px; width:170px;" tabindex="1" />
+							<br />
+							<br /><label for="j_password">Password:</label>
+							<br /><input type="password" id="j_password" name="j_password" value="" style="font-size:16px; width:170px;" tabindex="2" />
+							<br />
+								<div style="font-size:11px; margin-top: 8px;">
+									<input id="rememberMe" type="checkbox" name="_spring_security_remember_me" title="Remember me on this computer" class="remebereMeMargin" tabindex="3" />
+									<label for="rememberMe" title="Remember me on this computer">Remember me on this computer</label>
+								</div>
+
+							<div style="padding-left:112px; padding-top:20px;" id="login-button-wrapper">
+								<input type="submit" value="Log In" style="padding:5px 10px 5px 10px;color:#000000; font-family:Arial, sans-serif;font-size:14px; border: 1px solid black;" tabindex="4" id="login-button" onclick="loginClick();" /><img id="login-loading-img" src="/asset-manager-web/images/login-spinner-1s-40px.gif" style="display: none" class="login-spinner" />
+							</div>
+						</div>
+					</div>
+				</td>
+			</tr>
+
+		</table>
+	</form></body>
+</html>

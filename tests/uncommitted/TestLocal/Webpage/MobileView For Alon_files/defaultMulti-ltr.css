@@ -1,0 +1,7 @@
+.sortableTableHeaderNew th, .new-rich-table th {
+    text-align:left;
+}
+
+.leftMinus25MultiOnly{
+    left:-25px;
+}

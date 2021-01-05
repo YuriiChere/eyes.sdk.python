@@ -1,0 +1,247 @@
+
+// FUNCTIONS FOR RIGHT SIDE LIST (SELECTION)
+
+// catch the onclick event and decide if there was a SHIFT or a CTRL button pressed
+function subscribedTreeSingleClicked(elementIndex,event,element,identifier){
+	if (isSelectionFromTreeDisabled()){
+		return;
+	}
+
+	if (event.shiftKey==1){
+	  	shiftSelectElements(elementIndex,element);
+	}else if(event.ctrlKey==1){
+  		if(element.parentNode.className == 'treeItem'){
+  			element.parentNode.className = 'selectedTreeItem';
+  		}else{
+  			element.parentNode.className = 'treeItem';
+  		}
+	}else{
+		var selectionDiv = document.getElementById('selectionDiv');
+		clearSelectionDiv(selectionDiv);
+		element.parentNode.className = 'selectedTreeItem';
+	}
+}
+
+
+// method to select elements of list when SHIFT is pressed
+function shiftSelectElements(elementIndex,element){
+	var selectedIndex = 1000;
+	var selectionDiv = document.getElementById('selectionDiv');
+	var divs = selectionDiv.getElementsByTagName('DIV');
+	//find the element that is selected
+	for(i=0; i<divs.length ;i++ ){
+			if(divs[i].className=='selectedTreeItem'){
+				selectedIndex = i;
+				break ;
+			}
+	}
+	if(selectedIndex != 1000){
+		var start;
+		var end ;
+		// find the start and end point of the selection range
+		if(selectedIndex > elementIndex ){
+			start = elementIndex;
+			end = selectedIndex;
+		}else{
+			end = elementIndex;
+			start = selectedIndex;
+		}
+		var selectionDiv = document.getElementById('selectionDiv');
+		clearSelectionDiv(selectionDiv);
+		// set all the items in the selection range with the selected css
+		for(j=start; j <= end ;j++ ){
+			divs[j].className ='selectedTreeItem';
+		}
+	}else{
+		// no start or end points where found check only the clicked element
+		element.parentNode.className = 'selectedTreeItem';
+	}
+
+}
+
+// FUNCTIONS FOR LEFT SIDE LIST (TREE)
+
+// catch the onclick event and decide if there was a SHIFT or a CTRL button pressed
+function avaliableTreeSingleClicked(event,element,identifier){
+	if (isSelectionFromTreeDisabled()){
+		return;
+	}
+
+	if (event.shiftKey==1){
+	  	shiftTreeSelectElements(element,identifier);
+	}else if(event.ctrlKey==1){
+  		if(element.parentNode.className == 'treeItem'){
+  			element.parentNode.className = 'selectedTreeItem';
+  		}else{
+  			element.parentNode.className = 'treeItem';
+  		}
+	}else{
+		var selectionDiv = document.getElementById('mainTreeSelectionDiv');
+		clearSelectionDiv(selectionDiv);
+		element.parentNode.className = 'selectedTreeItem';
+	}
+}
+
+
+// method to select elements of tree when SHIFT is pressed
+function shiftTreeSelectElements(element,identifiert){
+	var elementIndex = 1000;
+	var selectedIndex = 1000;
+	var selectionDiv = document.getElementById('mainTreeSelectionDiv');
+	var divs = selectionDiv.getElementsByTagName('DIV');
+	// find the selected element index
+	for(i=0; i< divs.length ;i++ ){
+		if(divs[i].className=='selectedTreeItem'){
+			selectedIndex = i;
+			break ;
+		}
+	}
+
+	if (identifiert == undefined){
+        identifiert = $(element).children(0).val();
+	}
+
+	// find the clicked element index
+	for(i=0; i< divs.length ;i++ ){
+        var idents = divs[i].getElementsByTagName('INPUT');
+        if(idents[0].value == identifiert){
+            elementIndex = i;
+            break ;
+        }
+	}
+	if(selectedIndex != 1000 && elementIndex!=1000){
+		var start;
+		var end ;
+		// find the start and end point of the selection range
+		if(selectedIndex > elementIndex ){
+			start = elementIndex;
+			end = selectedIndex;
+		}else{
+			end = elementIndex;
+			start = selectedIndex;
+		}
+		var selectionDiv = document.getElementById('mainTreeSelectionDiv');
+		clearSelectionDiv(selectionDiv);
+		// set all the items in the selection range with the selected css
+		for(j=start; j <= end ;j++ ){
+			divs[j].className ='selectedTreeItem';
+		}
+	}else{
+		// no start or end points where found check only the clicked element
+		element.parentNode.className = 'selectedTreeItem';
+	}
+
+}
+// COMMON FUNCTIONS
+
+// method to clear all elements of selection css
+function clearSelectionDiv(selectedDiv){
+	var divs = selectedDiv.getElementsByTagName('DIV');
+	for(i=0; i<divs.length ;i++ ){
+		if(divs[i].className=='selectedTreeItem'){
+			divs[i].className = 'treeItem';
+		}
+	}
+}
+
+
+// method to get all the ids of the selected elements from the left side
+function moveRight(){
+	if (isSelectionFromTreeDisabled()){
+		return false;
+	}
+
+	var selectionDiv = document.getElementById('mainTreeSelectionDiv');
+	getSelectedNodesToMove(selectionDiv);
+	return true;
+}
+// method to get all the ids of the selected elements from the right side
+function moveLeft(){
+	if (isSelectionFromTreeDisabled()){
+		return false;
+	}
+
+	var selectionDiv = document.getElementById('selectionDiv');
+	getSelectedNodesToMove(selectionDiv);
+	return true;
+}
+
+
+// method to set all the selected id's in one string
+function getSelectedNodesToMove(selectionDiv){
+	var nodesToMove = '';
+	var divs = selectionDiv.getElementsByTagName('DIV');
+	for(i=0; i< divs.length ;i++ ){
+		if(divs[i].className =='selectedTreeItem'){
+			var inputs = divs[i].getElementsByTagName('INPUT');
+			nodesToMove=nodesToMove+","+inputs[0].value;
+		}
+	}
+	document.getElementById('nodesToMove').value=nodesToMove;
+	return nodesToMove;
+}
+
+function isSelectionFromTreeDisabled(){
+	return window.document.getElementById("mainForm:selectionFromTreeDisabled").value=="true";
+}
+
+
+function avaliableTreeDblClicked(event,element,identifier){
+	if (isSelectionFromTreeDisabled()){
+		return;
+	}
+	avaliableTreeSingleClicked(event,element,identifier);
+	window.document.getElementById("mainForm:moveRightButt").click();
+}
+
+function subscribedTreeDblClicked(index,event,element,identifier){
+	if (isSelectionFromTreeDisabled()){
+		return;
+	}
+	subscribedTreeSingleClicked(index,event,element,identifier);
+	window.document.getElementById("mainForm:moveLeftButt").click();
+}
+
+function setSelectionFromTreeDisabledState(state){
+	 var selectionDiv = document.getElementById('selectionDiv');
+ 	 clearSelectionDiv(selectionDiv);
+ 	 selectionDiv = document.getElementById('mainTreeSelectionDiv');
+ 	 clearSelectionDiv(selectionDiv);
+	 window.document.getElementById("mainForm:selectionFromTreeDisabled").value = state?"true":"false";
+	 setButtonEnabledStatus(window.document.getElementById("selctionFromTreeBodyDiv"),!state);
+}
+
+function onSingleSelectionTreeSelection(event, element, id) {
+	if (isSelectionFromTreeDisabled()){
+		return;
+	}
+
+	var selectionDiv = document.getElementById('mainForm:selectionDiv');
+
+	// unselect all tree checkboxes
+	var childCheckBoxes = getChildrenByTagName( selectionDiv, "INPUT" );
+	if (childCheckBoxes != null && childCheckBoxes != undefined) {
+		for (var index=0; index<childCheckBoxes.length; index++){
+			if (childCheckBoxes[index].type == "checkbox" ){
+				childCheckBoxes[index].checked = false;
+			}
+		}
+	}
+
+	// select this node check box
+	var childCheckBoxes = getChildrenByTagName( element, "INPUT" );
+	if (childCheckBoxes != null && childCheckBoxes != undefined) {
+		for (var index=0; index<childCheckBoxes.length; index++){
+			if (childCheckBoxes[index].type == "checkbox" ){
+				childCheckBoxes[index].checked = true;
+			}
+		}
+	}
+
+	// change all tree node style to un-select
+	clearSelectionDiv(selectionDiv);
+	// change selected node style to selected
+	element.className='selectedTreeItem';
+}
+
+

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<!-- saved from url=(0036)http://qa-mv-1292/asset-manager-web/ -->
+<html class="fullgrid"><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>MobileView</title>
+    <script type="text/javascript">
+        /*
+         This function hide the loading title when the page finished loading
+         */
+        function loadingFinishHandler(){
+            try {
+                window.document.getElementById("loadingDiv").style.display = 'none';
+                var mainFrame = window.document.getElementById("mainFrame");
+                mainFrame.style.display = 'inline';
+            }catch(err){}
+        }
+
+        function performUnLoad(){
+            try{
+                var isLoggedIn = true;
+
+                var frameWindow = window.document.getElementById("mainFrame").contentWindow;
+
+                if (frameWindow!=null && frameWindow.document.getElementById("notLogedInMarker")!=null){
+                    isLoggedIn = false;
+                }
+
+                if (isLoggedIn){
+                    var xmlhttp = new XMLHttpRequest();
+                    xmlhttp.open("GET", "finish?isAjax=true", true);
+                    xmlhttp.send(null);
+                }
+            } catch (err){
+                // nothing
+            }
+            return "";
+        }
+
+        function handleSessionTimeout(){
+            var handled = false;
+
+            if (window.parent!=null && window.parent!=window){
+                try{
+                    window.parent.handleSessionTimeout();
+                    handled = true;
+                } catch (err){
+                    // nothing
+                }
+            }
+
+            if (!handled){
+                throw "Session timeout not handled";
+            }
+        }
+
+
+        function getReEnterURL(){
+            var url = null;
+
+            if (window.parent!=null && window.parent!=window){
+                try{
+                    url = window.parent.getReEnterURL();
+                } catch (err){
+                    // nothing
+                }
+            }
+
+            if (url!=null){
+                return url;
+            } else {
+                throw "getReEnterURL not implemented";
+            }
+        }
+
+
+    </script>
+    <style>
+        .fullgrid, .fullgrid > body {
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body onbeforeunload="performUnLoad();" onunload="performUnLoad();" style="overflow: hidden;">
+<div id="loadingDiv" style="height: 100%; width: 100%; font-family: Arial; font-size: 12px; display: none;">
+    <h1>Loading, Please wait</h1>
+</div>
+<iframe id="mainFrame" style="height: 100%; width: 100%; display: inline;" frameborder="0" src="./MobileView For Alon_files/startup.html" onreadystatechange="loadingFinishHandler();" onload="loadingFinishHandler();"></iframe>
+
+
+</body></html>

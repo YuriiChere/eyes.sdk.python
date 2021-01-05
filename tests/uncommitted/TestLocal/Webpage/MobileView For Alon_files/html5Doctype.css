@@ -1,0 +1,39 @@
+html, body, #wrapper {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+html .layout-html5-menu-only {
+    height:100%;
+    width:100%;
+}
+
+#mainForm {
+    height:100%;
+    width:100%;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+#wrapper {
+    position: relative;
+}
+
+#top {
+}
+
+#middle{
+    flex: 1;
+}
+
+.disconnectedCoverDivInner{
+    left: -50%;
+    top:-106px !important;
+}
+
+.innerCoverDiv{
+    left:50%;
+}

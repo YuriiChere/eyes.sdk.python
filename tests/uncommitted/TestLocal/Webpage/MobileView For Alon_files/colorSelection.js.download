@@ -1,0 +1,153 @@
+function changeColor(color, event, param) {
+    if (param == undefined) {
+        param = '';
+    }
+
+    // getting the last selected node id
+    var selectedColorNodeId = document.getElementById("mainForm:selectedColorNode_" + param).value;
+
+    // getting the saved color
+    var defColor = document.getElementById("mainForm:defColor_" + param).value;
+
+    // getting the last selected node if exists
+    var selectedColorNode = null;
+    if (selectedColorNodeId != null) {
+        if (selectedColorNodeId != '') {
+            selectedColorNode = document.getElementById(document.getElementById("mainForm:selectedColorNode_" + param).value);
+        }
+    }
+
+    color = correctColor(color);
+
+    // keeping the selected hex for the flash map
+    selectedColorHexForMap = color;
+    document.getElementById("mainForm:selectedColorHex_" + param).value = color;
+
+    // setting saved color to not be chosen
+    try {
+        document.getElementById(param + "_color_" + defColor).className = "colorSelectionBox";
+        document.getElementById(param + "_color_" + defColor + "_border").className = "colorSelectionBorder";
+    } catch(e) {
+    }
+
+    // setting chosen color to selected color div
+    document.getElementById("selectedColor_" + param).style.background = color;
+
+    // setting the selected color to the bean
+    document.getElementById("mainForm:selectedColorHidden_" + param).value = color;
+
+    // if we need to update an outside field
+    updateFieldIfNeeded(color, param);
+
+    // setting last chosen to not be chosen
+    if (selectedColorNode != null) {
+        if (selectedColorNode.id != '') {
+            selectedColorNode.className = "colorSelectionBox";
+            document.getElementById(selectedColorNode.id + "_border").className = "colorSelectionBorder";
+        }
+    }
+
+    // setting chosen color to have border
+    if (event == null) {
+        selectedColorNode = null;
+    } else {
+        selectedColorNode = event.srcElement;
+    }
+
+    if (selectedColorNode != null) {
+        document.getElementById("mainForm:selectedColorNode_" + param).value = selectedColorNode.id;
+        if (selectedColorNode.id != '') {
+            selectedColorNode.className = "colorSelectionBoxSelected";
+            document.getElementById(selectedColorNode.id + "_border").className = "colorSelectionBorderSelected";
+        }
+    }
+
+    var noColorElement = document.getElementById('mainForm:noColor_' + param);
+    if (noColorElement!=null) {
+        var checked = noColorElement.checked;
+        if (!checked) {
+            applyColorToFlashMapIfNeeded(color);
+        } else {
+            noColorElement.click();
+            document.getElementById("mainForm:noColorChecked_" + param).value = 'false';
+        }
+    } else {
+        applyColorToFlashMapIfNeeded(color);
+    }
+}
+
+function noColorSwitch(event, param) {
+    var checked = document.getElementById('mainForm:noColor_' + param).checked;
+
+    var selectedColorHexField = document.getElementById("mainForm:selectedColorHex_" + param);
+
+    if (checked) {
+        document.getElementById("mainForm:noColorChecked_" + param).value = 'true';
+        applyColorToFlashMapIfNeeded(null);
+        updateFieldIfNeeded(null, param);
+        changeSelectedColorDiv('', param);
+
+        try {
+            document.getElementById(param + "_color_" + selectedColorHexField.value).className = "colorSelectionBox";
+            document.getElementById(param + "_color_" + selectedColorHexField.value + "_border").className = "colorSelectionBorder";
+        } catch(e) {}
+    } else {
+        document.getElementById("mainForm:noColorChecked_" + param).value = 'false';
+
+        if (selectedColorHexField.value == "null") {
+            selectedColorHexForMap = "#3172B4";
+            selectedColorHexField.value = "#3172B4";
+        }
+
+        applyColorToFlashMapIfNeeded(selectedColorHexField.value);
+        updateFieldIfNeeded(selectedColorHexField.value, param);
+        changeSelectedColorDiv(selectedColorHexField.value, param);
+        try {
+            document.getElementById(param + "_color_" + selectedColorHexField.value).className = "colorSelectionBoxSelected";
+            document.getElementById(param + "_color_" + selectedColorHexField.value + "_border").className = "colorSelectionBorderSelected";
+        } catch(e) {}
+    }
+}
+
+function changeSelectedColorDiv(color, param) {
+    document.getElementById("selectedColor_" + param).style.background = color;
+}
+
+function updateFieldIfNeeded(color, param) {
+    var updateField = document.getElementById("mainForm:updateField_" + param).value;
+    if (updateField != 'false') {
+        document.getElementById("mainForm:" + updateField).value = color;
+    }
+}
+
+function selectText(param) {
+    var hexaElement = document.getElementById("hexa_" + param);
+    hexaElement.select();
+}
+
+function blockEvent() {
+    if(event.stopPropagation)
+    {
+        event.stopPropagation();
+    }
+    event.cancelBubble=true;
+}
+
+function correctColor(originalColor) {
+    var base = '000000';
+    if (originalColor == null || originalColor == '') {
+        return '#000000';
+    }
+    if (!originalColor.match(/^#[0-9A-F]*$/i)) {
+        return '#000000';
+    }
+
+    var truncatedColor = originalColor.substr(1, 6);
+    var colorLength = truncatedColor.length;
+    var zerosToReplace = new Array(1 + colorLength).join("0");
+
+    var color = base.replace(zerosToReplace, truncatedColor);
+    color = '#' + color;
+
+    return color;
+}

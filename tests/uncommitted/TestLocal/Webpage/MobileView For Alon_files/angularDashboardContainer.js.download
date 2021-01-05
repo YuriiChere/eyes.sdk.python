@@ -1,0 +1,38 @@
+/**
+ * Overriding the general showCover method
+ */
+var generalShowCover = function() {
+    var cover = window.document.getElementById("pageSubmitCoverDiv");
+    if (cover != null){
+        cover.style.display = "inline";
+    }
+};
+
+function showCover() {
+    const angularIframeWindow = findAngularIframeWindow();
+    if (angularIframeWindow) {
+        const mvInternalSpinners = angularIframeWindow.getElementsByTagName('mv-spinner');
+        hideInternalSpinners(mvInternalSpinners);
+        generalShowCover();
+    } else {
+        generalShowCover();
+    }
+}
+
+function hideInternalSpinners(mvInternalSpinners) {
+    for (let spinnerIndex in mvInternalSpinners) {
+        let spinner = mvInternalSpinners[spinnerIndex];
+        if (spinner.style) {
+            spinner.style.display = "none";
+        }
+    }
+}
+
+function findAngularIframeWindow() {
+    const angularIframe = window.document.getElementById("angularContainerIframe");
+    if (angularIframe) {
+        if (angularIframe.contentDocument) {
+            return angularIframe.contentDocument;
+        }
+    }
+}

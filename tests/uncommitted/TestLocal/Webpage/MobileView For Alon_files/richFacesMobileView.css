@@ -1,0 +1,320 @@
+/*  RICH FACES TABLE   */
+
+
+/*-------------- data Table --------------------------- */
+.sortableTableRowSelected {
+    background-color: #CCFF99;
+    color: #ffffff;
+}
+.sortableTableRow{
+}
+/*-------------- data Table --------------------------- */
+
+/*-------------- Tabs --------------------------- */
+.rf-tab-hdr-tabline-top-mv .rf-tab-hdr-tabline-top{
+    border-top:0;
+    border-left: #e7e7f7 1px solid  ;
+    border-right: #e7e7f7 1px solid  ;
+    background: #e7e7f7 ;
+    border-bottom: 0;
+}
+
+.rf-tab-hdr-tabline-top-mv .rf-tab-cnt {
+    padding-top: 0px ;
+    border: 0px ;
+    height:100%;
+}
+
+.rf-tab-hdr-tabline-top-mv .rf-tab {
+    border-bottom: #e7e7f7 1px solid;
+    border-left: #e7e7f7 1px solid;
+    border-right: #e7e7f7 1px solid;
+    border-top: 0 solid;
+}
+
+
+.rf-tab-hdr-tabline-top-mv .rf-tab-hdr-brd {
+    background: none repeat scroll 0 0 white ;
+    border-bottom: #BED6F8 1px solid ;
+    border-style: none solid solid  ;
+    border-width: 0 ;
+    font-size: 5px ;
+}
+
+
+.properties_tab_inactive-mv .rf-tab-lbl, .properties_tab_active-mv .rf-tab-lbl{
+    font-size: 12px ;
+    color: #2a3c7b;
+    font-weight: normal ;
+    vertical-align: top ;
+}
+
+
+.rf-tab-hdr-inact{
+    background: #BED6F8 url(../../images/tabs/actTabBg.png) repeat-x center top !important;
+    border: #BED6F8 1px solid !important;
+    border-bottom: 0px !important;
+    padding-top: 2px !important;
+}
+
+.rf-tab-hdr-act{
+    background: #BED6F8 url(../../images/tabs/tabBg.png) repeat-x center top !important;
+    border: #BED6F8 1px solid  !important;
+    border-bottom: 0 !important;
+    padding-top: 2px !important;
+}
+
+/*-------------- Tabs --------------------------- */
+
+
+
+/*-------------- collapsible Panel, toggle --------------------------- */
+.mvCollapsiblePanel{
+    background-color:#f7f7ff !important;;
+    border: 0 !important;
+    padding: 0 !important;
+    width:100%;
+}
+
+.rf-cp-hdr{
+    background-image:none !important;
+}
+
+.mvCollapsiblePanel .rf-cp-hdr{
+    background-color: #d8dcf8;
+    padding: 0;
+    font-weight: bold;
+    border: #bed6f8 1px solid;
+}
+
+/*-------------- collapsible Panel, toggle --------------------------- */
+
+/*-------------- Autocomplete --------------------------- */
+
+INPUT.freeTextAutoCompleteStyle{
+    width:450px !important;
+    height:35px !important;
+    font-size:16px ;
+    line-height: 33px;
+    background-image: none !important;
+}
+
+.locatorSuggestionPopupStyleClass .rf-au-fnt{
+    font-size: 16px;
+    padding: 3px;
+}
+
+.locatorSuggestionPopupStyleClass {
+    background-color: white;
+    width: 600px ;
+    font-size: 16px;
+}
+
+.locatorSuggestionPopupStyleClass .rf-au:hover{
+    border: 1px solid rgb(197, 218, 237) ;
+    border-top-color: rgb(87, 148, 191)  ;
+    border-bottom-color: rgb(199, 226, 241)  ;
+}
+
+.locatorSuggestionPopupStyleClass .rf-au-lst-scrl{
+    width:auto;
+}
+
+.locatorSuggestionPopupStyleClass .rf-au-tbl {
+    border-collapse: collapse;
+    width:100%;
+}
+
+.smallAutocompleteClass .rf-au {
+    font-size:13px ;
+    background-image: none ;
+}
+
+.singleAssetInputAutocompleteClass{
+    height: 19px;
+    outline: none;
+}
+
+INPUT.smallAutocompleteClass{
+    font-size:13px ;
+    background-image: none !important;
+    _width:auto !important;
+}
+
+.smallPopupClass .rf-au-fnt{
+    font-size: 13px;
+}
+
+INPUT.wizardInputTextBig, SPAN.wizardInputTextBig{
+    background-image: none !important;
+    vertical-align: middle;
+}
+
+SPAN.smallAutocompleteClass{
+    background-image: none !important;
+    border: 1px solid rgb(226, 227, 236) ;
+    border-top-color: rgb(171, 173, 179)  ;
+    border-bottom-color: rgb(227, 233, 239)  ;
+    padding-left: 2px;
+    padding-right: 2px;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+SPAN.smallAutocompleteClass .rf-au:hover{
+    border: 1px solid rgb(197, 218, 237) ;
+    border-top-color: rgb(87, 148, 191)  ;
+    border-bottom-color: rgb(199, 226, 241)  ;
+}
+
+.smallPopupClass {
+    background-color: white;
+    font-size: 13px;
+}
+
+.smallPopupAutoWidthClass .rf-au-itm {
+    margin: auto;
+}
+
+.smallPopupAutoWidthClass .rf-au-lst-scrl {
+    width: auto;
+}
+
+.smallPopupAutoWidthClass .rf-au-fnt {
+    font-size: 13px;
+}
+
+
+.rf-au-lst-scrl{
+    _height:expression(this.scrollHeight > 199 ? "200px" : "auto");
+}
+
+.smallPopupClass .rf-au-tbl, .assetTaggingWizardPopupList  .rf-au-tbl, .smallPopupClass .rf-au-tbl tbody, .assetTaggingWizardPopupList  .rf-au-tbl tbody{
+    border-collapse: collapse;
+    width:100%;
+}
+
+div.threeLinesPopupClass div.rf-au-lst-scrl{
+    width:250px;
+    _height:expression(this.scrollHeight > 50 ? "50px" : "auto");
+    max-height: 50px;
+}
+
+.smallSelectedPopupRowClass {
+    background-color: #D0E6FF !important;
+}
+
+
+
+.locatorSmallSuggestionSelectedRowClass {
+    background-color: #D0E6FF;
+}
+
+.locatorSmallSuggestionSelectedRowClass TD {
+    border: 0px;
+    font-size: 12px;
+}
+
+
+
+.assetTaggingWizardPopupList{
+    font-size: 18px;
+    width:330px !important;
+    overflow: auto;
+}
+
+.assetTaggingWizardPopupList .rf-au-item,
+.assetTaggingWizardPopupList .rf-au-fnt, .assetTaggingWizardPopupList{
+    font-size: 18px !important;
+}
+
+/*-------------- Autocomplete --------------------------- */
+
+/*-------------- InplaceSelect --------------------------- */
+.rf-is-dflt-lbl {
+    color: #000000 !important;;
+    width:  auto !important;;
+}
+
+.rf-is{
+    background-color: transparent !important;
+}
+
+.rf-is-fld-cntr{
+    width:  auto !important;
+}
+
+.rf-is-dflt-lbl{
+    width:  auto !important;
+}
+
+/*-------------- InplaceSelect --------------------------- */
+
+
+/*-------------- inputNumberSpinner --------------------------- */
+SPAN.mvInputNumberSpinner{
+    border: 0 !important;
+}
+
+.mvInputNumberSpinner .rf-insp-btns {
+    position: relative !important;
+    top: 1px !important;
+    border-top: 1px solid #bed6f8 !important;
+    border-bottom: 1px solid #bed6f8 !important;
+    border-right: 1px solid #bed6f8 !important;
+    background: #BED6F8 url(../../images/tabs/actTabBg.png) repeat-x center top !important;
+}
+
+.mvInputNumberSpinner .rf-insp-dec, .mvInputNumberSpinner .rf-insp-inc {
+    height: 10px !important;
+}
+
+/*-------------- inputNumberSpinner --------------------------- */
+
+/*-------------- pickList, Shuttle --------------------------- */
+.reportPickList button{
+    background-image: none !important; /* if not mantioned rich will ovveride it*/
+    background: #BED6F8 url(../../images/tabs/actTabBg.png) repeat-x center top !important;
+    padding: 2px;
+    font-size: 11px;
+    border: 1px solid #c0c0c0 ;
+}
+
+.reportPickList button.rf-pick-btn-dis{
+    filter: alpha(opacity = 50);
+    -moz-opacity: .50;
+    opacity: .50;
+    color: black;
+}
+
+.reportPickList button.rf-ord-btn-dis{
+    filter: alpha(opacity = 50);
+    -moz-opacity: .50;
+    opacity: .50;
+    color: black;
+}
+
+/*-------------- pickList, Shuttle --------------------------- */
+
+
+/*--------------Calendar with Time ---------------------------- */
+.rf-cal-edtr-shdw{
+    filter: alpha(opacity = 50);
+    -moz-opacity: .50;
+    opacity: .50;
+}
+
+/* cbs-change : Overriding Panels font-family */
+*.rf-p-hdr, *.rf-p-b, *.rf-cp-hdr, *.rf-cp-b, *.rf-dt-c, *.rf-pick-opt,
+*.rf-au-fnt, input.rf-insp-inp[type="text"], *.rf-pick-src-cptn, *.rf-pick-tgt-cptn,
+*.rf-ulst-itm, *.rf-olst-itm, *.rf-dlst-trm, *.rf-dlst-dfn, *.rf-sel-inp, *.rf-sel-opt {
+    font-family: Arial !important;
+}
+
+.rf-cal-inp{
+    width:auto !important;
+}
+
+.rf-insp-btns{
+    margin-left: 0 !important;
+}

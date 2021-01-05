@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<!-- saved from url=(0068)http://qa-mv-1292/asset-manager-web/core/pages/homePage/homePage.jsf -->
+<html xmlns="http://www.w3.org/1999/xhtml" class="layout-html5-menu-only"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="cache-control" content="max-age=0, must-revalidate, no-cache, no-store, private">
+    <meta http-equiv="expires" content="-1">
+    <meta http-equiv="pragma" content="no-cache">
+
+    <title>MobileView</title><script>
+    /**
+     * i18n translator for messages in included *.js files
+     *
+     */
+
+    function getTranslation(key) {
+
+        switch (key) {
+
+            case "please_select_a_category_first":
+                return "Please select a category first.";
+
+            case "category_cannot_be_deleted":
+                return "Category cannot be deleted.";
+
+            case "category_cannot_be_duplicated":
+                return "Category cannot be copied.";
+
+            case "please_select_an_asset_first":
+                return "Please select an asset first.";
+
+            case "please_select_a_group_first":
+                return "Please select a group first.";
+
+            case "please_select_an_event_first":
+                return "Please select an event first.";
+
+            case "please_select_a_zone_first":
+                return "Please select a zone first.";
+
+            case "please_select_users_first":
+                return "Please select users first.";
+
+            case "please_select_a_department":
+                return "Please select a department.";
+
+            case "please_select_a_tag_first":
+                return "Please select a tag first.";
+
+            case "please_insert_field_name_first":
+                return "Please insert field name first.";
+
+            case "please_select_a_Report_first":
+                return "Please select a report first.";
+
+            case "please_select_area_first":
+                return "Please select area first.";
+
+            case "please_select_map_first":
+                return "Please select a map first.";
+
+            case "syncConfirmationMsg":
+                return "You have chosen to perform a site synchronization. Any entities that have been created manually will not be affected, however if you have made changes to entities that were created by prior synchronizations, the changes will be overwritten. Zones you have created or modified will not be affected.";
+
+            case "connection_was_lost":
+                return "Connection to server lost. Please check your network connection. Contact your systems administrator if the problem persists";
+
+            case "map_functions_cannot_add_level":
+                return "Cannot add another level beyond area";
+
+            case "please_select_par_level_first":
+                return "Please select par level first.";
+
+            case "ldap_sync_users_success":
+                return "User synchronization with LDAP server succeeded.";
+
+            case "locator_user_has_no_permission_to_view_area":
+                return "You have no permissions to view selected area.";
+
+            case "please_select_alert_first":
+                return "Please select alert first";
+
+            case "no_dept_selected":
+                return "No department is selected";
+
+            case "admin_multi_tag_noselection_error_message":
+                return "Please select a tag first.";
+
+            case "admin_gateway_noselection_error_message":
+                return "Please select a Gateway first";
+
+            case "propertiesPanel_asset_makeTagBlink_success":
+                return "Make tag blink request was sent";
+
+            case "propertiesPanel_asset_makeTagBlink_fail":
+                return "Make Tag Blink Failed";
+
+            case "propertiesPanel_asset_makeTagBlink_asset_not_found":
+                return "Make Tag Blink failed, since asset could be detected.";
+
+            case "alert_delete_confirmation_message":
+                return "Are you sure you want to delete the selected alert?";
+
+            case "camera_server_delete_confirmation_message":
+                return "Deleting the Camera Server will also delete all its Cameras.";
+
+            case "multi_edit_asset_results_abort_are_you_sure":
+                return "Are you sure you want to abort the current operation?";
+
+            case "apostrophe_in_is_not_valid_in_name":
+                return "Apostrophe is not a valid char in name";
+
+            case "corrective_action_group_delete_confirmation_message":
+                return "Are you sure you want to delete the selected corrective action group?";
+
+
+            case "asset_tagging_remove_asset_diff_cat_question":
+                return "The selected Asset is not a member of this Check-out Category, are you sure you wish to continue?";
+
+            case "bi_problems_loading_workbook_from_tableau_server":
+                return "MobileView experienced a problem loading the required workbook.  Please check the network connection to the analytics server.";
+
+            default:
+                alert("Key " + key + " is not translated");
+        }
+    }
+
+</script>
+
+    <script type="text/javascript">
+        try {
+            document.execCommand("BackgroundImageCache", false, true);
+        } catch(err) {
+        }
+    </script>
+
+    <script type="text/javascript" src="./jquery.js.download"></script>
+    <script type="text/javascript" src="./jquery.dateFormat.js.download"></script>
+    <script type="text/javascript" src="./resizeable_panel.js.download"></script>
+    <script type="text/javascript" src="./panelToggler.js.download"></script>
+    <script type="text/javascript" src="./supersleight.js.download"></script>
+    <script type="text/javascript" src="./general_layout.js.download"></script>
+    <script type="text/javascript" src="./generalScripts.js.download"></script>
+    <script type="text/javascript" src="./colorSelection.js.download"></script>
+    <script type="text/javascript" src="./menuFunctions.js.download"></script>
+    <script type="text/javascript" src="./topMenu.js.download"></script>
+    <script type="text/javascript" src="./selectionFromTreeFunctions.js.download"></script>
+    <script type="text/javascript" src="./lazySelectionFromTreeFunctions.js.download"></script>
+    <script type="text/javascript" src="./timeoutHandling.js.download"></script>
+    <script type="text/javascript">
+        var useModelessErrorDialog = false;
+    </script>
+    <script type="text/javascript">
+        var modelessErrorDialogTimeout = 0;
+    </script>
+
+    <link rel="StyleSheet" href="./default.css" type="text/css">
+    <link rel="StyleSheet" href="./richFacesMobileView.css" type="text/css">
+
+    <link rel="stylesheet" href="./generalLayout.css" type="text/css">
+        <link rel="StyleSheet" href="./defaultMulti.css" type="text/css">
+        <link rel="StyleSheet" href="./defaultMulti-ltr.css" type="text/css">
+            <link rel="StyleSheet" href="./default-ltr.css" type="text/css">
+            <link rel="StyleSheet" href="./richFacesMobileViewLtr.css" type="text/css">
+            <script type="text/javascript">isRtl = false;</script>
+
+    <link type="text/css" rel="StyleSheet" href="./html5Doctype.css">
+            <link type="text/css" rel="StyleSheet" href="./emDashboardContainerStyles.css">
+        <script src="./angularDashboardContainer.js.download"></script><script type="text/javascript" src="./jsf.js.jsf"></script><script type="text/javascript" src="./richfaces.js.download"></script><script type="text/javascript" src="./richfaces-queue.js.download"></script><script type="text/javascript" src="./richfaces-base-component.js.download"></script><script type="text/javascript" src="./poll.js.download"></script></head><body onmousedown="resetTimeoutCounter()" onmousemove="resetTimeoutCounter()" onkeydown="resetTimeoutCounter();return backPreventor();" onload="registerFormSubmitHandler(); ; correctPNG(); addLabelsToOptionsInPage();" onunload=";" style="visibility: visible; overflow: hidden; margin: 0px;">
+
+        
+        <div id="wrapper"><form id="mainForm" name="mainForm" method="post" action="http://qa-mv-1292/asset-manager-web/am/pages/dashboards/environmental-dashboard-container.jsf" enctype="application/x-www-form-urlencoded">
+
+    
+    <div id="pageSubmitCoverDiv" class="pageSubmitCover pageSubmitCoverSanity" style="display:none; ">
+        <div style="position:absolute; top:50%; display:table-cell; vertical-align:middle;" class="innerCoverDiv">
+            <div style="position:relative; top:-50%; width:100%;">
+                <center>
+                    <div class="spiner-css"></div>
+                </center>
+            </div>
+        </div>
+        <div class="pageSubmitDisablingCover"></div>
+    </div>
+
+    <div id="disconnectedCoverDiv" class="connectionLostCover" style="display:none; ">
+        <div style="position:absolute; top:50%; vertical-align:middle;" class="innerCoverDiv">
+            <div style="width:100%;" class="disconnectedCoverDivInner">
+                <div style="background-color: black; color:white; padding:20px; margin: 20px; font-size: 20px; width:400px; ">
+                    <span>Connection to server lost. Please check your network connection. Contact your systems administrator if the problem persists</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div style="display:none; width:100%; height:100%; position:absolute; text-align:center; overflow:hidden; z-index:0; " id="hourGlassIcon">
+        <div style="position:absolute; top:50%; display:table-cell; vertical-align:middle;">
+            <div style="position:relative; top:-50%">
+                <img src="./hourglass.gif">
+            </div>
+        </div>
+    </div><span style="display:none;" id="mainForm:generalPoll"><script type="text/javascript">new RichFaces.ui.Poll("mainForm:generalPoll",{"interval":120000,"ontimer":function(event){RichFaces.ajax("mainForm:generalPoll",event,{"incId":"1"} )},"enabled":true} )</script></span><input id="mainForm:connectionCheckButton" name="mainForm:connectionCheckButton" onclick="RichFaces.ajax(&quot;mainForm:connectionCheckButton&quot;,event,{&quot;incId&quot;:&quot;1&quot;} );return false;" style="display:none;" type="submit"><input id="mainForm:authenticationRequiredClearTokenButton" name="mainForm:authenticationRequiredClearTokenButton" onclick="RichFaces.ajax(&quot;mainForm:authenticationRequiredClearTokenButton&quot;,event,{&quot;incId&quot;:&quot;1&quot;} );return false;" style="display:none;" type="submit">
+                    <div id="top"><div xmlns="http://www.w3.org/1999/xhtml" class="topMenuAppBackground ">
+
+        <table cellspacing="0" cellpadding="0" style="width: 100%;">
+            <tbody><tr>
+                <td style="margin-top: 4px;" valign="top"><table xmlns="http://www.w3.org/1999/xhtml" cellpadding="0" cellspacing="0">
+    <tbody><tr>
+        
+        <td style="padding:5px;" class="alignLeft"><a href="http://qa-mv-1292/asset-manager-web/core/pages/homePage/homePage.jsf#" onclick="return myfaces.oam.submitForm(&#39;mainForm&#39;,&#39;mainForm:menuSubview:j_id_y_f&#39;);"><img src="./branding_logo.png" style="vertical-align:middle;height: 40px;"></a>
+        </td>
+                <td nowrap="true" style="vertical-align: middle;cursor: pointer;" valign="middle" onclick="onLeftMenuClick();"><span id="mainForm:menuSubview:appnamemenu" style="padding-left: 5px; padding-right: 5px;" class="topLeftMenuAppName  ">Environmental Monitoring</span>
+                    <span style="width: 15px; height: 10px; position: relative;top:1px;"><img id="mainForm:menuSubview:menuarrow" src="./arrow_down.png">
+                    </span>
+                    <div id="posLeftItem"></div><div xmlns="http://www.w3.org/1999/xhtml" id="homeMenu" style="display: none; position: absolute; z-index: 99999;">
+    <table cellpadding="0" cellspacing="0" style="width: 100%; height: 100%" class="margin6Right">
+        <tbody><tr style="height: 10px;font-size: 8px;">
+            <td width="10" height="10">
+                <div style="width: 10px; height: 10px; background: url(&#39;/asset-manager-web/images/top_menu/menu_top_left.png&#39;) no-repeat;">
+                </div>
+            </td>
+            <td height="10">
+                <div style="height: 10px; width: 100%; background: url(&#39;/asset-manager-web/images/top_menu/menu_top_middle.png&#39;) repeat-x;">
+                </div>
+            </td>
+            <td width="10" height="10">
+                <div style="width: 10px; height: 10px; background: url(&#39;/asset-manager-web/images/top_menu/menu_top_right.png&#39;) no-repeat;">
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 10px; height: 100%; background: url(&#39;/asset-manager-web/images/top_menu/menu_middle_left.png&#39;) repeat-y;">
+            </td>
+            <td nowrap="true" style="background-color: white;cursor: pointer;" valign="middle">
+                    <div class="rightMenuItemDiv alignLeft" style="padding: 0;margin: 0;" onmouseover="$(this).toggleClass(&#39;rightMenuItemDiv-hover&#39;);" onmouseout="$(this).toggleClass(&#39;rightMenuItemDiv-hover&#39;);"><a href="http://qa-mv-1292/asset-manager-web/core/pages/homePage/homePage.jsf#" onclick="return myfaces.oam.submitForm(&#39;mainForm&#39;,&#39;mainForm:menuSubview:j_id_y_j_7_2&#39;);" style="width:100%;" class="rightMenuLabelItem"><span title="Welcome Page">Welcome Page</span></a>
+                    </div>
+                            <div class="rightMenuItemSep" style="height:2px; padding:0; margin:0; margin-top: 2px;"></div>
+
+                        <div class="rightMenuItemDiv alignLeft" style="padding: 0;margin: 0;" onmouseover="$(this).toggleClass(&#39;rightMenuItemDiv-hover&#39;);" onmouseout="$(this).toggleClass(&#39;rightMenuItemDiv-hover&#39;);"><a href="http://qa-mv-1292/asset-manager-web/core/pages/homePage/homePage.jsf#" onclick="return myfaces.oam.submitForm(&#39;mainForm&#39;,&#39;mainForm:menuSubview:j_id_y_j_8_0_1_4&#39;);" style="width:100%;" class="rightMenuLabelItem"><span title="Asset Management">Asset Management</span></a>
+                        </div>
+                            <div class="rightMenuItemSep" style="height:2px; padding:0; margin:0; margin-top: 2px;"></div>
+
+                        <div class="rightMenuItemDiv alignLeft" style="padding: 0;margin: 0;" onmouseover="$(this).toggleClass(&#39;rightMenuItemDiv-hover&#39;);" onmouseout="$(this).toggleClass(&#39;rightMenuItemDiv-hover&#39;);"><a href="http://qa-mv-1292/asset-manager-web/core/pages/homePage/homePage.jsf#" onclick="return myfaces.oam.submitForm(&#39;mainForm&#39;,&#39;mainForm:menuSubview:j_id_y_j_8_2_1_4&#39;);" style="width:100%;" class="rightMenuLabelItem"><span title="Patient Visibility">Patient Visibility</span></a>
+                        </div>
+
+            </td>
+            <td style="width: 10px; height: 100%; background: url(&#39;/asset-manager-web/images/top_menu/menu_middle_right.png&#39;) repeat-y">
+            </td>
+        </tr>
+        <tr>
+            <td width="10" height="10">
+                <div style="width: 10px; height: 10px; background: url(&#39;/asset-manager-web/images/top_menu/menu_bottom_left.png&#39;) no-repeat;">
+                </div>
+            </td>
+            <td height="10">
+                <div style="height: 10px; width: 100%; background: url(&#39;/asset-manager-web/images/top_menu/menu_bottom_middle.png&#39;) repeat-x;">
+                </div>
+            </td>
+            <td width="5" height="5">
+                <div style="width: 10px; height: 10px; background: url(&#39;/asset-manager-web/images/top_menu/menu_bottom_right.png&#39;) no-repeat;">
+                </div>
+            </td>
+        </tr>
+    </tbody></table>
+</div>
+                </td>
+
+    </tr>
+</tbody></table>
+                </td>
+
+                <td style="width: 50%">
+                </td>
+                    <td valign="top">
+<table cellpadding="0" cellspacing="0" style="display:block;">
+    <tbody><tr>
+        <td style="vertical-align: top;width:2px;" valign="top"><img src="./seperator.png">
+        </td>
+            <td nowrap="true" style="vertical-align: top;" valign="top"><a href="http://qa-mv-1292/asset-manager-web/core/pages/homePage/homePage.jsf#" onclick="return myfaces.oam.submitForm(&#39;mainForm&#39;,&#39;mainForm:menuSubview:j_id_y_t:0:j_id_y_w&#39;);" title="Home" style="display: block; background: url(&#39;/asset-manager-web/images/top_menu/home-selected.png&#39;)  no-repeat ;width:60px; height:59px;"></a>
+            </td>
+            <td nowrap="true" style="vertical-align: top;" valign="top"><a href="http://qa-mv-1292/asset-manager-web/core/pages/homePage/homePage.jsf#" onclick="return myfaces.oam.submitForm(&#39;mainForm&#39;,&#39;mainForm:menuSubview:j_id_y_t:1:j_id_y_v&#39;);" onmouseover="changeBackgroundUrlMenu(this,&#39;/asset-manager-web/images/top_menu/locator-hover.png&#39;);" onmouseout="changeBackgroundUrlMenu(this,&#39;/asset-manager-web/images/top_menu/locator.png&#39;);" title="Locator" style="display: block; background: url(&#39;/asset-manager-web/images/top_menu/locator.png&#39;) no-repeat; width:60px; height:59px;"></a>
+            </td>
+            <td nowrap="true" style="vertical-align: top;" valign="top"><a href="http://qa-mv-1292/asset-manager-web/core/pages/homePage/homePage.jsf#" onclick="return myfaces.oam.submitForm(&#39;mainForm&#39;,&#39;mainForm:menuSubview:j_id_y_t:2:j_id_y_v&#39;);" onmouseover="changeBackgroundUrlMenu(this,&#39;/asset-manager-web/images/top_menu/alerts-hover.png&#39;);" onmouseout="changeBackgroundUrlMenu(this,&#39;/asset-manager-web/images/top_menu/alerts.png&#39;);" title="Alerts" style="display: block; background: url(&#39;/asset-manager-web/images/top_menu/alerts.png&#39;) no-repeat; width:60px; height:59px;"></a>
+            </td>
+            <td nowrap="true" style="vertical-align: top;" valign="top"><a href="http://qa-mv-1292/asset-manager-web/core/pages/homePage/homePage.jsf#" onclick="return myfaces.oam.submitForm(&#39;mainForm&#39;,&#39;mainForm:menuSubview:j_id_y_t:3:j_id_y_v&#39;);" onmouseover="changeBackgroundUrlMenu(this,&#39;/asset-manager-web/images/top_menu/reports-hover.png&#39;);" onmouseout="changeBackgroundUrlMenu(this,&#39;/asset-manager-web/images/top_menu/reports.png&#39;);" title="Reports" style="display: block; background: url(&#39;/asset-manager-web/images/top_menu/reports.png&#39;) no-repeat; width:60px; height:59px;"></a>
+            </td>
+    </tr>
+</tbody></table>
+                    </td>
+                <td style="width: 50%">
+                </td>
+
+                
+                <td valign="top" style="padding-top: 5px;"><table xmlns="http://www.w3.org/1999/xhtml" cellpadding="0" cellspacing="0" style="display: inline;">
+    <tbody><tr>
+        
+        <td>
+            <div class="userPicImgBg alignRight"><img src="./profile_default.png" style="width:36px; height: 36px; margin-top: 2px;" class="margin4Right">
+
+            </div>
+        </td>
+
+        
+        <td nowrap="nowrap" style="vertical-align: middle;padding-left: 5px; padding-right: 5px;"><span class="topRightMenuUserName">MobileView Admin</span>
+        </td>
+
+        
+        <td style="padding: 0; margin: 0; border: 0; background: transparent; cursor: pointer;" id="systemMenu" onclick="onDropDownMenuClick();"><img src="./settins_button.png" style="vertical-align:middle;width:49px; height: 36px;" class="margin6Right">
+                <div id="posItem"></div><div xmlns="http://www.w3.org/1999/xhtml" id="dropDownMenuItems" style="display: none; position: absolute; z-index:99999;" class="margin6R">
+    <table cellpadding="0" cellspacing="0" style="width: 100%; height: 100%">
+        <tbody><tr style="height: 10px;font-size: 8px;">
+            <td width="10" height="10">
+                <div style="width: 10px; height: 10px; background: url(&#39;/asset-manager-web/images/top_menu/menu_top_left.png&#39;) no-repeat;">
+                </div>
+            </td>
+            <td height="10">
+                <div style="height: 10px; width: 100%; background: url(&#39;/asset-manager-web/images/top_menu/menu_top_middle.png&#39;) repeat-x;">
+                </div>
+            </td>
+            <td width="10" height="10">
+                <div style="width: 10px; height: 10px; background: url(&#39;/asset-manager-web/images/top_menu/menu_top_right.png&#39;) no-repeat;">
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 10px; height: 100%; background: url(&#39;/asset-manager-web/images/top_menu/menu_middle_left.png&#39;) repeat-y;">
+            </td>
+            <td nowrap="true" style="background-color: white;cursor: pointer;" valign="middle">
+
+                        <div class="rightMenuItemDiv alignLeft" onmouseover="$(this).toggleClass(&#39;rightMenuItemDiv-hover&#39;);" onmouseout="$(this).toggleClass(&#39;rightMenuItemDiv-hover&#39;);" style="padding: 0;margin: 0;"><a href="http://qa-mv-1292/asset-manager-web/core/pages/homePage/homePage.jsf#" onclick="return jsf.util.chain(this, event,&#39;;&#39;, &#39;return myfaces.oam.submitForm(\&#39;mainForm\&#39;,\&#39;mainForm:menuSubview:j_id_y_1c:0:j_id_y_1g\&#39;);&#39;);" id="mainForm:menuSubview:j_id_y_1c:0:j_id_y_1g" name="mainForm:menuSubview:j_id_y_1c:0:j_id_y_1g" style="width:100%;" class="rightMenuLabelItem"><span title="Administration">Administration</span></a>
+                        </div>
+                            <div class="rightMenuItemSep" style="height:2px; padding:0; margin:0; margin-top: 2px;"></div>
+
+                        <div class="rightMenuItemDiv alignLeft" onmouseover="$(this).toggleClass(&#39;rightMenuItemDiv-hover&#39;);" onmouseout="$(this).toggleClass(&#39;rightMenuItemDiv-hover&#39;);" style="padding: 0;margin: 0;"><a href="http://qa-mv-1292/asset-manager-web/core/pages/homePage/homePage.jsf#" onclick="return jsf.util.chain(this, event,&#39;openUserSettingsWithSectionsFilter(\&#39;general\&#39;, \&#39;general;locator;user_locale;bi_section\&#39;, \&#39;my_settings\&#39;); return false;;&#39;, &#39;return myfaces.oam.submitForm(\&#39;mainForm\&#39;,\&#39;mainForm:menuSubview:j_id_y_1c:1:j_id_y_1g\&#39;);&#39;);" id="mainForm:menuSubview:j_id_y_1c:1:j_id_y_1g" name="mainForm:menuSubview:j_id_y_1c:1:j_id_y_1g" style="width:100%;" class="rightMenuLabelItem"><span title="My Settings">My Settings</span></a>
+                        </div>
+                            <div class="rightMenuItemSep" style="height:2px; padding:0; margin:0; margin-top: 2px;"></div>
+
+                        <div class="rightMenuItemDiv alignLeft" onmouseover="$(this).toggleClass(&#39;rightMenuItemDiv-hover&#39;);" onmouseout="$(this).toggleClass(&#39;rightMenuItemDiv-hover&#39;);" style="padding: 0;margin: 0;"><a href="http://qa-mv-1292/asset-manager-web/core/pages/homePage/homePage.jsf#" onclick="return jsf.util.chain(this, event,&#39;openChangePassword(); return false;;&#39;, &#39;return myfaces.oam.submitForm(\&#39;mainForm\&#39;,\&#39;mainForm:menuSubview:j_id_y_1c:2:j_id_y_1g\&#39;);&#39;);" id="mainForm:menuSubview:j_id_y_1c:2:j_id_y_1g" name="mainForm:menuSubview:j_id_y_1c:2:j_id_y_1g" style="width:100%;" class="rightMenuLabelItem"><span title="Change My Password">Change My Password</span></a>
+                        </div>
+                            <div class="rightMenuItemSep" style="height:2px; padding:0; margin:0; margin-top: 2px;"></div>
+
+                        <div class="rightMenuItemDiv alignLeft" onmouseover="$(this).toggleClass(&#39;rightMenuItemDiv-hover&#39;);" onmouseout="$(this).toggleClass(&#39;rightMenuItemDiv-hover&#39;);" style="padding: 0;margin: 0;"><a href="http://qa-mv-1292/asset-manager-web/core/pages/homePage/homePage.jsf#" onclick="return jsf.util.chain(this, event,&#39;openCenteredWindow(\&#39;/asset-manager-web/am/pages/global/helpPage.jsf\&#39;, \&#39;helpWindow\&#39;, \&#39;900\&#39;, \&#39;600\&#39;);return false;;&#39;, &#39;return myfaces.oam.submitForm(\&#39;mainForm\&#39;,\&#39;mainForm:menuSubview:j_id_y_1c:3:j_id_y_1g\&#39;);&#39;);" id="mainForm:menuSubview:j_id_y_1c:3:j_id_y_1g" name="mainForm:menuSubview:j_id_y_1c:3:j_id_y_1g" style="width:100%;" class="rightMenuLabelItem"><span title="Open Help Panel">Help</span></a>
+                        </div>
+                            <div class="rightMenuItemSep" style="height:2px; padding:0; margin:0; margin-top: 2px;"></div>
+
+                        <div class="rightMenuItemDiv alignLeft" onmouseover="$(this).toggleClass(&#39;rightMenuItemDiv-hover&#39;);" onmouseout="$(this).toggleClass(&#39;rightMenuItemDiv-hover&#39;);" style="padding: 0;margin: 0;"><a href="http://qa-mv-1292/asset-manager-web/Logout" onclick=";" style="width:100%;" class="rightMenuLabelItem"><img src="./icon_logout.png" style="width:17px; height: 17px;" class="rightMenuImgWrapper margin5Right"><span title="Sign Out">Sign Out</span></a>
+                        </div>
+            </td>
+            <td style="width: 10px; height: 100%; background: url(&#39;/asset-manager-web/images/top_menu/menu_middle_right.png&#39;) repeat-y">
+            </td>
+        </tr>
+        <tr>
+            <td width="10" height="10">
+                <div style="width: 10px; height: 10px; background: url(&#39;/asset-manager-web/images/top_menu/menu_bottom_left.png&#39;) no-repeat;">
+                </div>
+            </td>
+            <td height="10">
+                <div style="height: 10px; width: 100%; background: url(&#39;/asset-manager-web/images/top_menu/menu_bottom_middle.png&#39;) repeat-x;">
+                </div>
+            </td>
+            <td width="5" height="5">
+                <div style="width: 10px; height: 10px; background: url(&#39;/asset-manager-web/images/top_menu/menu_bottom_right.png&#39;) no-repeat;">
+                </div>
+            </td>
+        </tr>
+    </tbody></table>
+</div>
+        </td>
+    </tr>
+</tbody></table>
+                </td>
+            </tr>
+        </tbody></table>
+</div><span id="mainForm:messages" style="display: block;"></span>
+                    </div>
+                <div id="middle">
+        <iframe id="angularContainerIframe" frameborder="0" class="em-dashboard-iframe-container" src="./saved_resource.html"></iframe>
+                </div><input type="hidden" name="mainForm_SUBMIT" value="1"><input type="hidden" name="javax.faces.ViewState" id="j_id__v_0:javax.faces.ViewState:1" value="QgwBflx+7ihxrGnubjnwmsUxlaqHtabIeCebE3TQvBD3yRuU" autocomplete="off"></form>
+        </div>
+        <object style="display:none;" classid="clsid:D4E769A8-3CD4-4A33-8B6B-353A74838447" codebase="http://qa-mv-1292/asset-manager-web/core/pages/security/MobileViewClientSecurity.CAB">
+        </object>
+
+
+    <script type="text/javascript">
+        loadPanelsViewMode();
+        loadPageSizes();
+        registerAjaxErrorHandler();
+        correctPNG();
+
+        
+
+                window.document.body.style.visibility = "visible";
+
+        /*
+         window.history.forward(1);
+         */
+
+        function handleSessionTimeoutInternal() {
+            // alert("Your session had been expired, please relogin to the system");
+            window.location.href="/asset-manager-web/core/pages/login/sessionTimeout.jsf";
+        }
+
+        function beforeUnloadHandler(){
+            savePanelsViewMode();
+            if (checkDirty()){
+                return "There are unsaved changes in this page. Are you sure you want to navigate to another page and lose your changes?";
+            } else {
+                beforePageUnload();
+            }
+        }
+
+        window.onbeforeunload=beforeUnloadHandler;
+
+        timeoutAfterNumOfMinutes = 0;
+        resetTimeoutCounter();
+    </script>
+<div class="popupClass"></div></body></html>

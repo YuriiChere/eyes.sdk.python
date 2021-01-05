@@ -1,0 +1,79 @@
+var isBrowserHtml5DocType = false;
+try{isBrowserHtml5DocType = !isInCompatibilityMode()} catch(err){} // This function is in generalScripts
+
+// Right Menu
+function onDropDownMenuClick(){
+    var dropDownMenu = $('#dropDownMenuItems');
+    if (dropDownMenu.css("display") != "none"){
+        toggleDropDownMenuClick();
+    } else {
+        var posItem = $('#posItem');
+        // Calc position
+        var topP = posItem.offset().top;
+        var leftP = posItem.offset().left - dropDownMenu.width() + posItem.width();
+        dropDownMenu.css({top:topP, left: leftP});
+
+        // After binding the click on body will happen now.
+        $('body').bind("click", toggleDropDownMenuClick);
+    }
+}
+
+function toggleDropDownMenuClick(){
+    var dropDownMenu = $('#dropDownMenuItems');
+    if (dropDownMenu.css("display") == "none"){
+        if (isBrowserHtml5DocType){
+            dropDownMenu.show(); // slideDown - There is a bug in jQuery, in html5 mode it jumps after the slide
+        } else {
+            dropDownMenu.slideDown("fast"); // slideDown - There is a bug in jQuery, in html5 mode it jumps after the slide
+        }
+    } else {
+        dropDownMenu.hide();
+        $('body').unbind("click", toggleDropDownMenuClick);
+    }
+}
+
+// Left menu
+function onLeftMenuClick(){
+    var homeMenu = $('#homeMenu');
+    if (homeMenu.css("display") != "none"){
+        toggleLeftMenuClick();
+    } else {
+        var posLeftItem = $('#posLeftItem');
+        // Calc position
+        var topP = posLeftItem.offset().top;
+        var rightP = posLeftItem.offset().right;
+        homeMenu.css({top:topP, right: rightP});
+
+
+        // After binding the click on body will happen now.
+        $('body').bind("click", toggleLeftMenuClick);
+
+        if (isBrowserHtml5DocType){
+            // If the app name is longer then other apps names in combo change combo to be longer.
+            // This is for HTML5 when width 100% works differently :)
+            var appNameNotInComboLen = $(".topLeftMenuAppName");
+            if (appNameNotInComboLen.length > 0 && (appNameNotInComboLen.width() + 30) > homeMenu.width()){ // 30 is the arrow
+                homeMenu.css({width:appNameNotInComboLen.width()+ 30});
+            }
+        }
+    }
+}
+
+function toggleLeftMenuClick(){
+    var homeMenu = $('#homeMenu');
+    if (homeMenu.css("display") == "none"){
+        if (isBrowserHtml5DocType){
+            homeMenu.show(); // slideDown - There is a bug in jQuery, in html5 mode it jumps after the slide
+        } else {
+            homeMenu.slideDown("fast"); // slideDown - There is a bug in jQuery, in html5 mode it jumps after the slide
+        }
+    } else {
+        homeMenu.hide();
+        $('body').unbind("click", toggleLeftMenuClick);
+    }
+}
+
+// Middle Menu
+function changeBackgroundUrlMenu(itemToChange,iconUrl){
+    $(itemToChange).css("background", "url('"+iconUrl+"') no-repeat");
+}

@@ -1,0 +1,196 @@
+/*
+	general function for the creation of cookie
+*/
+
+var isPanelsTogglersInitilized = false;
+
+function createCookie(name,value,days) {
+	if (days) {
+		var date = new Date();
+		date.setTime(date.getTime()+(days*24*60*60*1000));
+		var expires = "; expires="+date.toGMTString();
+	}
+	else var expires = "";
+	document.cookie = name+"="+value+expires+"; path=/";
+}
+
+/*
+	general function for reading a cookie
+*/
+function readCookie(name) {
+	var nameEQ = name + "=";
+	var ca = document.cookie.split(';');
+	for(var i=0;i < ca.length;i++) {
+		var c = ca[i];
+		while (c.charAt(0)==' ') c = c.substring(1,c.length);
+		if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+	}
+	return null;
+}
+
+/*
+	general function for erasing the cookie
+*/
+function eraseCookie(name) {
+	createCookie(name,"",-1);
+}
+
+
+function togglePanelView( elementId ){
+	var elm = window.document.getElementById( elementId );
+	if (isPanelHidden( elm )){
+		showPanel( elm );
+		// fixAdminEventsGridOnPanelOpen();
+	} else {
+		hidePanel( elm );
+		// fixAdminEventsGridOnPanelClose();
+	}
+}
+
+function isPanelHidden( elm ){
+	if (elm.tagName == null ){
+		elm = window.document.getElementById( elm );
+	}
+
+	return elm.style.display == "none";
+}
+
+function isPanelVisible( elm ){
+	if (elm.tagName == null ){
+		elm = window.document.getElementById( elm );
+	}
+
+	return elm.style.display == "" || elm.style.display != "none";
+}
+
+
+
+
+function syncButtonStatus( panelElm, status ){
+	if (panelElm.toggleButtonId != null || $(panelElm).attr("toggleButtonId") != null){
+		var buttonElement = window.document.getElementById($(panelElm).attr("toggleButtonId"));
+		if (buttonElement!=null){
+			setButtonSelectedStatus( buttonElement, status );
+		}
+	}
+}
+
+
+function hidePanel( elm ){
+    if (elm==null){
+        return;
+    }
+
+	if (elm.tagName == null ){
+		elm = window.document.getElementById( elm );
+
+        if (elm==null){
+            return;
+        }
+	}
+
+
+
+	if (isPanelVisible(elm)){
+		if (isPanelsTogglersInitilized){
+			clearPageSizes();
+		}
+
+		elm.style.display = "none";
+	}
+	syncButtonStatus( elm, false );
+}
+
+function showPanel( elm ){
+	if (elm==null){
+		return;
+	}
+
+	if (elm.tagName == null ){
+		elm = window.document.getElementById( elm );
+
+		if (elm==null){
+			return;
+		}
+	}
+
+
+	if (isPanelHidden(elm)){
+		if (isPanelsTogglersInitilized){
+			clearPageSizes();
+		}
+
+		elm.style.display = "";
+	}
+	syncButtonStatus( elm, true );
+}
+
+
+function loadPanelsViewMode(){
+	// alert("loading");
+	if (isPanelsTogglersInitilized){
+		return;
+	}
+
+	var bodyElement = window.document.body;
+	loadPanelViewMode(bodyElement);
+
+	isPanelsTogglersInitilized = true;
+}
+
+function loadPanelViewMode(element){
+	var elementVar = $(element);
+	if (elementVar.attr('panel') == "true" && element.id != null && element.id != "" ){
+		var display_status = null;
+		if (elementVar.attr('rememberStatus') == null || elementVar.attr('rememberStatus') == "true" ){
+			display_status = readCookie( "PANEL_VIEW_MODE" + element.id );
+		}
+
+		if (display_status==null || display_status==""){
+			display_status  = elementVar.attr('defaultDisplayStatus');
+			if (display_status==null || display_status==""){
+				display_status="visible";
+			}
+		}
+
+		if (display_status == "visible" ){
+			showPanel(element);
+		} else {
+			hidePanel(element);
+		}
+	}
+	for (var index=0; index<element.childNodes.length; index++){
+		loadPanelViewMode(element.childNodes[index] );
+	}
+}
+
+function savePanelsViewMode(){
+	// alert("saving");
+
+	if (!isPanelsTogglersInitilized){
+		return;
+	}
+
+	var bodyElement = window.document.body;
+	savePanelViewMode(bodyElement);
+}
+
+function savePanelViewMode(element){
+	var elementVar = $(element);
+	if (elementVar.attr('panel') == "true" && element.id != null && element.id != "" ){
+		if (elementVar.attr('rememberStatus') == null || elementVar.attr('rememberStatus') == "true" ){
+			var display_status;
+			if (isPanelVisible(element )){
+				display_status = "visible";
+			} else {
+				display_status = "hidden";
+			}
+
+			createCookie( "PANEL_VIEW_MODE" + element.id, display_status );
+		}
+	}
+
+	for (var index=0; index<element.childNodes.length; index++){
+		savePanelViewMode(element.childNodes[index] );
+	}
+}

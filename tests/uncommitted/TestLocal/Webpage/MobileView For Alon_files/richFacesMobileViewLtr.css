@@ -1,0 +1,109 @@
+/*  RICH FACES TABLE   */
+
+.sortableTable {
+	background-color: #FFFFFF;
+	border: 1px solid #000000 !important;/* black border*/
+	border-collapse:collapse;
+	empty-cells: show;
+	color:red;
+	font-family:arial, Helvetica, sans-serif;
+	font-size:12px;
+	vertical-align:top;
+	text-align:left;
+}
+
+.sortableTableHeader, .rf-dt-shdr-c {
+	background-color:#6A73A5 !important;
+	color:#FFFFFF !important;
+	font-family:arial, Helvetica, sans-serif !important;;
+	font-size:12px !important;;
+	text-align:left !important;;
+	border-left: 0px !important;
+	border-right:0px !important ;
+    background-image:none !important;
+}
+
+
+.sortableTableColumn, .rf-dt-c {
+	border-left: 0px !important;
+	border-right:0px !important;
+	color:#000000 !important;
+	padding-left:10px !important;
+	padding-top:1px !important;
+	padding-right:10px;
+	padding-bottom:1px !important;;
+	font-weight:bold;
+	text-align:left !important;
+	cursor:pointer;
+}
+
+.sortableTableColumn123 {
+	border-left: 1px solid red;
+	border-right:10px red;
+	color:#000000;
+	padding-left:10px;
+	padding-top:1px;
+	padding-right:10px;
+	padding-bottom:1px;
+	font-weight:bold;
+	text-align:left;
+	cursor:pointer;
+}
+
+
+.selectCheckbox{
+	float:left;
+	text-align:left;
+}
+
+.sortHeaderCmdDesc{
+	background: URL(../../images/icons/arrow_down.png) right center no-repeat;
+	width: 15px;
+	height: 15px;
+}
+
+.sortHeaderCmdAsc{
+	background: URL(../../images/icons/arrow_up.png) right center no-repeat;
+	width: 15px;
+	height: 15px;
+}
+
+.sortHeaderCmd{
+	color:#FFFFFF;
+	padding-right :5px;
+	text-align:left;
+    font-size: 12px !important;
+}
+
+.statusIcon{
+	background: URL(../../images/status_off.gif) right center no-repeat;
+	width: 16.5px;
+	height: 15px;
+}
+
+.rich-shuttle-source-caption{
+    text-align:left;
+}
+
+.rich-shuttle-target-caption{
+    text-align:left;
+}
+
+.rf-pick-btn{
+    text-align: center;
+}
+
+.sortablePagerTableHeader {
+	background-color:#6A73A5;
+	color:#FFFFFF !important;
+	font-family:arial, Helvetica, sans-serif;
+	font-size:16px;
+	text-align:left;
+	border-left: 0px !important;
+	border-right:0px !important ;
+}
+
+.rf-tab-hdr-spcr{
+    padding-left: 1px !important;
+}
+

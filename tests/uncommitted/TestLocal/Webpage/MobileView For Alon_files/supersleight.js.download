@@ -1,0 +1,115 @@
+var supersleight	= function() {
+
+	var root = false;
+
+	// Path to a transparent GIF image
+	var shim			= '/asset-manager-web/images/x.gif';
+
+	// RegExp to match above GIF image name
+	// var shim_pattern	= /x\.gif$/i;
+
+
+	var recursiveHandler = function(obj){
+		if (obj!=null && obj.ignoreSuperslight == null){
+
+			if (obj.currentStyle.backgroundImage.match(/\.png/i) !== null) {
+				bg_fnFixPng(obj);
+				obj.ignoreSuperslight = "true";
+			}
+			// image elements
+			if (obj.tagName=='IMG' && obj.src.match(/\.png$/i) !== null){
+				el_fnFixPng(obj);
+				obj.ignoreSuperslight = "true";
+			}
+
+			var childObjs = obj.children;
+			for (var i = childObjs.length - 1, child = null; (child = childObjs[i]); i--) {
+				recursiveHandler(child);
+			}
+		}
+
+	}
+
+	var fnLoadPngs = function() {
+		var startObj;
+		if (root) {
+			startObj = document.getElementById(root);
+		}else{
+			startObj = document.body;
+		}
+
+		recursiveHandler(startObj);
+	};
+
+	var bg_fnFixPng = function(obj) {
+
+		var mode = 'scale';
+		var bg	= obj.currentStyle.backgroundImage;
+		var src = bg.substring(5,bg.length-2);
+		/*
+		if (obj.currentStyle.backgroundRepeat == 'no-repeat') {
+			mode = 'crop';
+		}
+		*/
+
+		obj.runtimeStyle.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='" + src + "', sizingMethod='" + mode + "')";
+		obj.runtimeStyle.backgroundImage = 'url('+shim+')';
+
+	};
+
+	var el_fnFixPng = function(img) {
+		var src = img.src;
+		img.style.width = img.width + "px";
+		img.style.height = img.height + "px";
+		img.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='" + src + "', sizingMethod='scale')";
+		img.src = shim;
+
+		/*
+		if (img.onclick!=null){
+			var span = window.document.createElement("SPAN");
+			img.replaceNode(span);
+			span.appendChild(img);
+			span.onclick = img.onclick;
+			img.onclick = null;
+		}
+		*/
+
+	};
+
+	/*
+	var addLoadEvent = function(func) {
+		var oldonload = window.onload;
+		if (typeof window.onload != 'function') {
+			window.onload = func;
+		} else {
+			window.onload = function() {
+				if (oldonload) {
+					oldonload();
+				}
+				func();
+			};
+		}
+	};*/
+
+	return {
+		/*
+		init: function() {
+			addLoadEvent(fnLoadPngs);
+		},
+		*/
+
+		limitTo: function(el) {
+			root = el;
+		},
+
+		run: function() {
+			fnLoadPngs();
+		}
+	};
+}();
+
+// limit to part of the page ... pass an ID to limitTo:
+// supersleight.limitTo('header');
+/*
+supersleight.init();
+*/
